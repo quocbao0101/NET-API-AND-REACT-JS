@@ -1,0 +1,9 @@
+export const CART_REQUEST = "CART_REQUEST";
+export const CART_SUCCESS = "CART_SUCCESS";
+export const CART_ERROR = "CART_ERROR";
+export const CART_ADD = "CART_ADD";
+export const CART_DELETE = "CART_DELETE";
+export const CART_UPDATE = "CART_UPDATE";
+export const CART_CLEAR = "CART_CLEAR";
+export const OPEN_MESSAGE = "OPEN_MESSAGE";
+export const CLOSE_MESSAGE = "CLOSE_MESSAGE";
