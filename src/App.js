@@ -1,7 +1,7 @@
 import Guest from './Guest';
-import Product from "./pages/Product/Product" ;
-import Header from './pages/Header/Header';
+import Product from "./pages/Product/" ;
 import { Route, Routes } from 'react-router-dom';
+
 
 function App() {
   return (

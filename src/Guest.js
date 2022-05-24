@@ -5,7 +5,7 @@ import Header from "./pages/Header/Header";
 
 const Guest = () => {
   return (
-    <div>
+    <div style={{ padding: 10}}>
       <Header />
       <Outlet />
     </div>
