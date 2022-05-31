@@ -24,4 +24,13 @@ export const useStyles = makeStyles((theme) => ({
    fontWeight: 700,
    fontSize: 20,
  },
+ space:{
+  marginTop: 20,
+  fontWeight: 700,
+  fontSize: 20,
+  marginLeft: 50,
+ },
+ dollar: {
+  fontSize: 20,
+ }
 }));

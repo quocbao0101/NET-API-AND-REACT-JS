@@ -26,45 +26,14 @@ export const useStyles = makeStyles((theme) => ({
  },
 }));
 
-export const categoryData = [
-    {
-        id:1,
-        title: 'All',
-    },
-    {
-        id:2,
-        title: 'Italian',
-    },
-    {
-        id:3,
-        title: 'American',
-    },
-    {
-        id:4,
-        title: 'Asian',
-    },
-    {
-        id:5,
-        title: 'Mexican',
-    },
-    {
-        id:6,
-        title: 'Thai',
-    },
-    {
-        id:7,
-        title: 'Vegan',
-    },
-    {
-        id:8,
-        title: 'Desserts',
-    },
-    {
-        id:9,
-        title: 'Fast food',
-    },
-    {
-        id:10,
-        title: 'More',
-    },
+export const categoriesData = [
+{id: 1, title: 'ALL'},
+{id: 2, title: 'ITALIAN'},
+{id: 3, title: 'AMERICAN'},
+{id: 4, title: 'ASIAN'},
+{id: 5, title: 'MEXICAN'},
+{id: 6, title: 'THAI'},
+{id: 7, title: 'VEGAN'},
+{id: 8, title: 'DESSERTS'},
+{id: 9, title: 'FAST FOOD'}
 ]

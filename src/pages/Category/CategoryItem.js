@@ -5,7 +5,6 @@ import Button from '@material-ui/core/Button';
 
 export default function CategoryItem(props) {
   const classes = useStyles();
-
   return (
     <Button 
     className={classes.paper}

@@ -12,7 +12,6 @@ import {
 
 const initState = {
 	open: false,
-	loading: false,
 	carts: [],
 };
 

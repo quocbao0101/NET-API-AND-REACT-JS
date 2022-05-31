@@ -6,6 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/styles';
 import Category from '../Category';
 import ProductItems from './ProductItems';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllProductSuccess, categoryFilter } from '../../redux/products/action';
+import { productRemaining } from '../../redux/products/selectors';
+import { categoriesData } from '../Category/Constants';
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -21,63 +25,49 @@ const useStyles = makeStyles((theme) => ({
 export default function Product() {
   const classes = useStyles();
 
-  const Loading = () => {
-    <Grid   
-    item
-    xs={12}
-    container
-    spacing={0}
-    direction="column"
-    alignItems="center"
-    justifyContent="center"
-    >
-      <img className={classes.image} src={gif} alt='gif' />
-    </Grid>
-  }
-  
-  const [product, setProduct] = useState([])
-  const [loading, setLoading] = useState(false);
-  function getEvents() {
-    axios.get("https://localhost:44388/sinhvien")
-        .then(response => response.data)
-        .then((data) => {
-            setProduct(data);
-            setLoading(false);
-            console.log(data);
-        });
-  }
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const categories = categoriesData;
+  const products = useSelector(productRemaining);
+
+
+  // get Products
   useEffect(() => {
+    async function getEvents() {
+      setLoading(true);
+      axios.get("https://62958d0375c34f1f3b1c3d6d.mockapi.io/food")
+          .then(response => response.data)
+          .then((data) => {
+              dispatch(fetchAllProductSuccess(data));
+              setLoading(false);
+          });
+    }
     getEvents();
-  }, []); 
+  }, [dispatch]); 
 
-  const example = [{
-    id:1,
-    title: 'Vo dich',
-    src: 'https://cdn.tgdd.vn/2020/10/CookRecipe/Avatar/salad-ot-chuong-thit-ga-thumbnail.jpg',
-  },
-  {
-    id:2,
-    title: 'Vo dich 2',
-    src: 'https://cdn.tgdd.vn/2020/10/CookRecipe/Avatar/salad-ot-chuong-thit-ga-thumbnail.jpg',
-  },
-  {
-    id:3,
-    title: 'Vo dich 3',
-    src: 'https://cdn.tgdd.vn/2020/10/CookRecipe/Avatar/salad-ot-chuong-thit-ga-thumbnail.jpg',
-  },
-  {
-    id:4,
-    title: 'Vo dich 4',
-    src: 'https://cdn.tgdd.vn/2020/10/CookRecipe/Avatar/salad-ot-chuong-thit-ga-thumbnail.jpg',
-  }]
 
+  function handleCategoryChange(category)
+  {
+    dispatch(categoryFilter(category));
+  }
   return (
     <div>
-        {loading ?  <Loading />
+        {loading ?     
+        <Grid   
+          item
+          xs={12}
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          >
+            <img className={classes.image} src={gif} alt='gif' />
+        </Grid>
           :(
             <div>
-              <Category />
-              <ProductItems data={example}  />
+              <Category categories={categories} handleCategoryChange={handleCategoryChange} />
+              <ProductItems data={products} />
             </div>
           )
         }

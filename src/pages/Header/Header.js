@@ -10,13 +10,22 @@ import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import { useStyles } from './Constants';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import { useDispatch } from 'react-redux';
+import { searchFilter } from '../../redux/products/action';
 
 
 
 export default function Header() {
   const classes = useStyles();
   const [isOpenDrawer , setIsOpenDrawer] = useState(false);
-
+  const [text, setText] = useState('');
+  const dispatch = useDispatch();
+  function handleOnchange(e)
+  {
+    setText((e.target.value).toLowerCase());
+    console.log((e.target.value).toLowerCase())
+    dispatch(searchFilter((e.target.value).toLowerCase()))
+  }
   return (
     <div>
       <AppBar position="static" className={classes.appbar} elevation={0}>
@@ -46,6 +55,8 @@ export default function Header() {
                     input: classes.inputInput,
                   }}
                   inputProps={{ 'aria-label': 'search' }}
+                  value={text}
+                  onChange={handleOnchange}
                 />
               </div>
             </Grid>
