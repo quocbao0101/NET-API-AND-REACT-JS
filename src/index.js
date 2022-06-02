@@ -7,13 +7,16 @@ import { createStore } from 'redux';
 import rootReducer from './rootReducer';
 import { Provider } from 'react-redux';
 import './index.css'
+import { SnackbarProvider } from 'notistack';
 
 const store = createStore(rootReducer);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <BrowserRouter>
-        <App />
+        <SnackbarProvider maxSnack={3}>
+            <App />
+        </SnackbarProvider>
     </BrowserRouter>
   </Provider>
 );

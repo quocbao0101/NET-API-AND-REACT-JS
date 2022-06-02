@@ -3,9 +3,13 @@ import Grid from '@material-ui/core/Grid';
 import Items from './Items';
 
 
+
+
+
 export default function ProductItems(props) {
   const data = props.data;
   const classes = useStyles();
+
 
   return (
     <>
@@ -15,14 +19,16 @@ export default function ProductItems(props) {
             </Grid>
             <Grid xs={12} item container spacing={3}>
                 {data.map(mealList => 
-                <Grid xs={12} md={3} xl={3} item key={mealList.id} onClick={()=> console.log('Hello')}>
-                    <Items 
-                        id={mealList.id} 
-                        title={mealList.title}
-                        src={mealList.src}
-                        dollar={mealList.dollar}
-                    />
-                </Grid>)}
+                <Grid xs={12} md={3} xl={3} item key={mealList.id}>
+                        <Items 
+                            id={mealList.id} 
+                            title={mealList.title}
+                            src={mealList.src}
+                            dollar={mealList.dollar}
+                        >
+                        </Items>
+                </Grid>
+                )}
             </Grid>
         </Grid>
     </>

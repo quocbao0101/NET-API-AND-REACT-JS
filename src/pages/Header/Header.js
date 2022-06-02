@@ -3,79 +3,53 @@ import AppBar from '@material-ui/core/AppBar';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { Menu } from '@material-ui/icons';
 import { ShoppingCart } from '@material-ui/icons';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import { useStyles } from './Constants';
-import PermIdentityIcon from '@material-ui/icons/PermIdentity';
-import { useDispatch } from 'react-redux';
-import { searchFilter } from '../../redux/products/action';
+
+import Cart from '../Cart';
+import { useSelector } from 'react-redux';
 
 
 
 export default function Header() {
   const classes = useStyles();
+  const { carts } = useSelector((state) => state.cartReducer);
   const [isOpenDrawer , setIsOpenDrawer] = useState(false);
-  const [text, setText] = useState('');
-  const dispatch = useDispatch();
-  function handleOnchange(e)
-  {
-    setText((e.target.value).toLowerCase());
-    console.log((e.target.value).toLowerCase())
-    dispatch(searchFilter((e.target.value).toLowerCase()))
-  }
+
+
   return (
     <div>
       <AppBar position="static" className={classes.appbar} elevation={0}>
           <Grid item container>
-            <Grid xs={4} md={4} xl={4} item container>
-              <Box>
-                <Button className={classes.menu} ><Menu /></Button>
-              </Box>
-              <Box className={classes.title}>
-                <span className={classes.text}>
-                  Order
-                </span>
-                <span className={classes.something}>
-                  something
-                </span>
-              </Box>
+            <Grid xs={8} md={8} xl={8} item container>
+              <Grid item xs={3} md={1} xl={1} container alignContent='center'>
+                <Button className={classes.menu}  ><Menu /></Button>
+              </Grid>
+              <Grid item xs={9} md={11} xl={11} container alignContent='center'>
+                  <span className={classes.text}>
+                    Order something
+                  </span>
+              </Grid>
             </Grid>
-            <Grid xs={4} md={4} xl={4} item>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder="Search…"
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-                  value={text}
-                  onChange={handleOnchange}
-                />
-              </div>
-            </Grid>
-            <Grid xs={4} md={4} xl={4} item spacing={2} container justifyContent='flex-end'>
-              <Grid item>
-                <Button onClick={() => setIsOpenDrawer(true)} className={classes.iconCart}><ShoppingCart /></Button>
+            <Grid xs={4} md={4} xl={4} item spacing={3} alignContent='center' container justifyContent='flex-end'>
+              <Grid item >
+                <Button onClick={() => setIsOpenDrawer(true)} className={classes.iconCart}>
+                  <ShoppingCart />
+                  {carts.length > 0 && (                  
+                    <Box className={classes.box}>
+                      <span className={classes.amountProduct}>{carts.length}</span>
+                    </Box>)}
+                </Button>
                 <SwipeableDrawer
                     anchor='right'
                     open={isOpenDrawer}
                     onClose={() => setIsOpenDrawer(false)}
                     onOpen={() => setIsOpenDrawer(true)}
                 >
-                    <Box p={2} width='250px' textAlign='center'>
-                        <h2>Hello World</h2>
-                    </Box>
+                  <Cart />
                 </SwipeableDrawer>
-              </Grid>
-              <Grid item>
-                <Button className={classes.iconCart}><PermIdentityIcon /></Button>
               </Grid>
             </Grid>
           </Grid>

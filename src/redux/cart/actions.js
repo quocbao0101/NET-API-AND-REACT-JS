@@ -2,22 +2,21 @@ import {
 	CART_ADD,
 	CART_CLEAR,
 	CART_DELETE,
-	CART_REQUEST,
 	CART_UPDATE,
-	CLOSE_MESSAGE,
-	OPEN_MESSAGE,
-} from "./constaints";
-
-export const requestCart = () => {
-	return {
-		type: CART_REQUEST,
-	};
-};
+	CART_QTY,
+} from "./constants";
 
 export const cartAdd = (data) => {
 	return {
 		type: CART_ADD,
 		payload: data,
+	};
+};
+
+export const cartQty = (id) => {
+	return {
+		type: CART_QTY,
+		payload: id,
 	};
 };
 
@@ -28,10 +27,10 @@ export const cartDelete = (data) => {
 	};
 };
 
-export const cartUpdate = (data) => {
+export const cartUpdate = ({id, qty}) => {
 	return {
 		type: CART_UPDATE,
-		payload: data,
+		payload: {id, qty},
 	};
 };
 
@@ -41,16 +40,3 @@ export const cartClear = () => {
 	};
 };
 
-export const openMessage = (data) => {
-	return {
-		type: OPEN_MESSAGE,
-		payload: data,
-	};
-};
-
-export const closeMessage = (data) => {
-	return {
-		type: CLOSE_MESSAGE,
-		payload: data,
-	};
-};

@@ -4,7 +4,6 @@ export const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     title: {
-      padding: 2,
     },
     menu: {
         padding: 12,
@@ -12,8 +11,13 @@ export const useStyles = makeStyles((theme) => ({
     },
     text: {
       color: '#000',
-      fontSize: 35,
-      marginTop: 5,
+      fontSize: 25,
+      "@media (min-width:900px)": {
+        fontSize: 35,
+      },
+      [theme.breakpoints.up("md")]: {
+        fontSize: 35,
+      },
     },
     appbar: {
       background: '#FFFFFF',
@@ -52,17 +56,34 @@ export const useStyles = makeStyles((theme) => ({
       background: '#FEF5DA',
       padding: 16,
       borderRadius: 10,
+      height:55,
+      width: 55,
+      "@media (min-width:900px)": {
+        height: 55,
+        width: 55,
+      },
+      [theme.breakpoints.up("md")]: {
+        height:55,
+        width: 55,
+      },
       '&:hover': {
         background: "#FEF5DA",
      },
     },
-    something: {
-        color: '#000',
-        fontSize: 28,
-        marginTop: 5,
-        marginLeft: 8,
-    },
     username: {
         color: '#000',
+    },
+    box: {
+      position: 'absolute',
+      borderRadius: 8,
+      backgroundColor: '#0AAF60',
+      top: -5,
+      right: -5,
+      height: 25,
+      width: 25,
+    },
+    amountProduct: {
+        fontSize: 13,
+        color: '#fff',
     }
   }));

@@ -2,73 +2,55 @@ import {
 	CART_ADD,
 	CART_CLEAR,
 	CART_DELETE,
-	CART_ERROR,
-	CART_REQUEST,
-	CART_SUCCESS,
+	CART_QTY,
 	CART_UPDATE,
-	CLOSE_MESSAGE,
-	OPEN_MESSAGE,
 } from "./constants.js";
 
 const initState = {
 	open: false,
+	loading: false,
 	carts: [],
 };
 
-const cartReducer = (state = initState, action) => {
-	switch (action.type) {
-		case CART_REQUEST:
-			return {
-				...state,
-				loading: true,
-			};
-		case CART_SUCCESS:
-			return {
-				...state,
-				loading: false,
-				carts: action.payload,
-			};
-		case CART_ERROR:
-			return {
-				...state,
-				loading: false,
-			};
+const cartReducer = (state = initState, { type, payload }) => {
+	switch (type) {
 		case CART_ADD:
 			return {
 				...state,
-				carts: [...state.carts, action.payload],
+				carts: [...state.carts, payload],
 			};
+		
 		case CART_DELETE:
 			return {
 				...state,
-				carts: state.carts.filter((item) => item.id !== action.payload),
+				carts: state.carts.filter((item) => item.id !== payload),
 			};
 		case CART_UPDATE:
 			let newCarts = [...state.carts];
-			newCarts.forEach((cart) => {
-				if (cart.id === action.payload.id) {
-					cart.amount = action.payload.amount;
-				}
-			});
+			const data = newCarts.map(cart =>  cart.id === payload.id ? 
+				{
+				  ...cart, qty: payload.qty
+				} : cart);
 			return {
 				...state,
-				carts: newCarts,
-			};
+				carts: data,
+			}
 		case CART_CLEAR:
 			return {
 				...state,
 				carts: [],
 			};
-		case OPEN_MESSAGE:
+		case CART_QTY:
+			let newCart = [...state.carts];
+			const cart = newCart.map(cart =>  cart.id === payload ? 
+				{
+					
+				  ...cart, qty: Number(cart.qty) + 1
+				} : cart);
 			return {
 				...state,
-				open: action.payload,
-			};
-		case CLOSE_MESSAGE:
-			return {
-				...state,
-				open: action.payload,
-			};
+				carts: cart,
+			}
 		default:
 			return state;
 	}
