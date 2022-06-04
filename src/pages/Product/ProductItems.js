@@ -23,8 +23,8 @@ export default function ProductItems(props) {
                         <Items 
                             id={mealList.id} 
                             title={mealList.title}
-                            src={mealList.src}
-                            dollar={mealList.dollar}
+                            picture={mealList.picture}
+                            price={mealList.price}
                         >
                         </Items>
                 </Grid>

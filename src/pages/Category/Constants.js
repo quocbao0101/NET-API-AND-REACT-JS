@@ -24,6 +24,18 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     fontSize: 15,
  },
+ activeMenu:
+ {
+   padding: theme.spacing(2, 2, 2, 2),
+   borderColor: '#EAEAEA',
+   border: '3px solid',
+   borderRadius: 30,
+   height: 180,
+   width: 160,
+   minHeight: 150,
+   minWidth: 100,
+   background: '#FEF5DA ',
+ }
 }));
 
 export const categoriesData = [

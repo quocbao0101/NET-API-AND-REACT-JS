@@ -7,8 +7,8 @@ export default function CategoryItem(props) {
   const classes = useStyles();
   return (
     <Button 
-    className={classes.paper}
-    onClick={() => console.log(props)}>
+      className={classes.paper}
+    >
         <Grid
         item             
         container 

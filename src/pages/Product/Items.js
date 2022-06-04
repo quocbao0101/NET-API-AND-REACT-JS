@@ -10,7 +10,7 @@ import { useSnackbar } from 'notistack';
 
 
 export default function Items(props) {
-  const { id, title, dollar, src} = props;
+  const { id, title, price, picture} = props;
   const { enqueueSnackbar } = useSnackbar();
   const { carts } = useSelector((state)=> state.cartReducer);
   const { value: inCart, setValue: setInCart } = useCheckbox(false);
@@ -42,12 +42,12 @@ export default function Items(props) {
           <CardMedia
           className={classes.image}         
           component="img"
-          image={src}
+          image={picture}
           alt="Paella dish" />
         </Button>
         <Grid xs item style={{ marginLeft: 10}}>
             <span className={classes.title}>{title}</span>
-            <Typography className={classes.dollar}>{dollar}$</Typography>
+            <Typography className={classes.dollar}>{price}$</Typography>
         </Grid>
     </Grid>
   )

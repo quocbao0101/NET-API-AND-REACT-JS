@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import productReducer from "./reducers";
+
 
 export const productsSelector = (state) => state.productReducer.products;
 export const categoryFilter = (state) => state.productReducer.filters.category;
@@ -13,8 +13,7 @@ export const productRemaining = createSelector(productsSelector,categoryFilter,s
             return (product.title.toLowerCase() 
             + product.src 
             + product.id 
-            + product.category.id
-            + product.category.title
+            + product.category
             + product.dollar);
         }
         else
@@ -22,10 +21,9 @@ export const productRemaining = createSelector(productsSelector,categoryFilter,s
             return (product.title.toLowerCase() 
             + product.src
             + product.id
-            + product.category.id
-            + product.category.title
+            + product.category
             + product.dollar)
-            && (product.category.title === category.title);
+            && (product.category === category.title);
         }
     }
     )));

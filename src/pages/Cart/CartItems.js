@@ -12,7 +12,7 @@ import { useSnackbar } from 'notistack';
 
 
 export default function CartItems(props) {
-    const { dollar, qty, src, title, id } = props.carts;
+    const { price, qty, picture, title, id } = props.carts;
     
     const [quantity, setQuantity] = useState(qty);
     const { edit } = props;
@@ -22,7 +22,7 @@ export default function CartItems(props) {
     function handleOnDelete(id)
     {
         dispatch(cartDelete(id));
-        enqueueSnackbar('Delete success', {variant: 'success'});
+        enqueueSnackbar('Delete successfully', {variant: 'success'});
     }
     const handleChange = (event) => {
         if(Number(event.target.value) < 0)
@@ -35,6 +35,7 @@ export default function CartItems(props) {
         }
         setQuantity(event.target.value);
         dispatch(cartUpdate({id , qty: event.target.value}));
+        enqueueSnackbar('Updated successfully', {variant: 'success'});
       };
     const classes = useStyles();
     return (
@@ -47,12 +48,12 @@ export default function CartItems(props) {
                 </IconButton>
             </Grid>
             <Grid xs={3} md={3} lg={3} item container alignContent='center'>
-                <img className={classes.image} alt='Cart Item' src={src}/>
+                <img className={classes.image} alt='Cart Item' src={picture}/>
             </Grid>
             </>)
             : (        
         <Grid xs={5} md={5} lg={5} item container alignContent='center'>
-            <img className={classes.imageEdit} alt='Cart Item' src={src}/>
+            <img className={classes.imageEdit} alt='Cart Item' src={picture}/>
         </Grid>)
             }
         <Grid xs={5} md={5} lg={5} item container alignContent='center'>
@@ -67,7 +68,7 @@ export default function CartItems(props) {
             <span className={classes.space} style={{fontWeight: 700}}>{title}</span>
         </Grid>
         <Grid xs={2} md={2} lg={2} item container alignContent='center'>
-            <span style={{color: '#BFBFBF'}}>{dollar}$</span>
+            <span style={{color: '#BFBFBF'}}>{price}$</span>
         </Grid>
     </>
     )

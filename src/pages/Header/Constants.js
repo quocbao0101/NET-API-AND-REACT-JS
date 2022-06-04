@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     text: {
       color: '#000',
+      fontWeight: 'bold',
       fontSize: 25,
       "@media (min-width:900px)": {
         fontSize: 35,

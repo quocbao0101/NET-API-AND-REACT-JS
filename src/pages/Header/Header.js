@@ -31,6 +31,7 @@ export default function Header() {
                   <span className={classes.text}>
                     Order something
                   </span>
+                  
               </Grid>
             </Grid>
             <Grid xs={4} md={4} xl={4} item spacing={3} alignContent='center' container justifyContent='flex-end'>

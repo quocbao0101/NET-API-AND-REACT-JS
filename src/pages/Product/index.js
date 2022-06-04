@@ -9,7 +9,6 @@ import ProductItems from './ProductItems';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProductSuccess, categoryFilter } from '../../redux/products/action';
 import { productRemaining } from '../../redux/products/selectors';
-import { categoriesData } from '../Category/Constants';
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -27,15 +26,31 @@ export default function Product() {
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const categories = categoriesData;
+  const [categories, setCategories] = useState([]);
   const products = useSelector(productRemaining);
 
+  const [activeKey, setActiveKey] = useState("");
+
+
+  // get Category
+  useEffect(() => {
+    async function getEvents() {
+      setLoading(true);
+      axios.get("https://localhost:44388/category")
+          .then(response => response.data)
+          .then((data) => {
+              setCategories(data);
+              setLoading(false);
+          });
+    }
+    getEvents();
+  }, [dispatch]); 
 
   // get Products
   useEffect(() => {
     async function getEvents() {
       setLoading(true);
-      axios.get("https://62958d0375c34f1f3b1c3d6d.mockapi.io/food")
+      axios.get("https://localhost:44388/food")
           .then(response => response.data)
           .then((data) => {
               dispatch(fetchAllProductSuccess(data));
@@ -48,6 +63,11 @@ export default function Product() {
 
   function handleCategoryChange(category)
   {
+    if (activeKey === category) {
+      setActiveKey("");
+    } else {
+      setActiveKey(category);
+    }
     dispatch(categoryFilter(category));
   }
   return (
@@ -66,7 +86,7 @@ export default function Product() {
         </Grid>
           :(
             <div>
-              <Category categories={categories} handleCategoryChange={handleCategoryChange} />
+              <Category categories={categories} handleCategoryChange={handleCategoryChange} activeKey={activeKey} />
               <ProductItems data={products} />
             </div>
           )

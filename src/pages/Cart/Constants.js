@@ -69,5 +69,10 @@ export const useStyles = makeStyles((theme) => ({
         width:'100%',
         maxWidth: 50, 
         fontSize:16,
+    },
+    boxLocation: {
+        padding: 20,
+        borderRadius: 10,
+        backgroundColor: '#FEF5DA',
     }
 }));
