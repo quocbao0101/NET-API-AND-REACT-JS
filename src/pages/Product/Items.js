@@ -33,7 +33,7 @@ export default function Items(props) {
         ...data,
         qty: 1,
       }));
-      enqueueSnackbar('Add sucess', {variant: 'success'});
+      enqueueSnackbar('Add successfully', {variant: 'success'});
     }
   }
   return (
